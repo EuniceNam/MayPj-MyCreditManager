@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C5F649C329F5347D00EFAA6B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F649C229F5347D00EFAA6B /* main.swift */; };
+		C5F2DE6829FA6A95006F5A60 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F2DE6729FA6A95006F5A60 /* main.swift */; };
+		C5F2DE6C2A039D1F006F5A60 /* GuideString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F2DE6B2A039D1F006F5A60 /* GuideString.swift */; };
+		C5F649C329F5347D00EFAA6B /* Grades+GradeLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F649C229F5347D00EFAA6B /* Grades+GradeLetter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +25,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C5F2DE6729FA6A95006F5A60 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		C5F2DE6A2A038DD8006F5A60 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		C5F2DE6B2A039D1F006F5A60 /* GuideString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideString.swift; sourceTree = "<group>"; };
 		C5F649BF29F5347D00EFAA6B /* MyCreditManager */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MyCreditManager; sourceTree = BUILT_PRODUCTS_DIR; };
-		C5F649C229F5347D00EFAA6B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		C5F649C229F5347D00EFAA6B /* Grades+GradeLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Grades+GradeLetter.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +62,10 @@
 		C5F649C129F5347D00EFAA6B /* MyCreditManager */ = {
 			isa = PBXGroup;
 			children = (
-				C5F649C229F5347D00EFAA6B /* main.swift */,
+				C5F2DE6729FA6A95006F5A60 /* main.swift */,
+				C5F649C229F5347D00EFAA6B /* Grades+GradeLetter.swift */,
+				C5F2DE6B2A039D1F006F5A60 /* GuideString.swift */,
+				C5F2DE6A2A038DD8006F5A60 /* .swiftlint.yml */,
 			);
 			path = MyCreditManager;
 			sourceTree = "<group>";
@@ -69,6 +77,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C5F649C629F5347D00EFAA6B /* Build configuration list for PBXNativeTarget "MyCreditManager" */;
 			buildPhases = (
+				C5F2DE692A038CE6006F5A60 /* Run SwiftLint */,
 				C5F649BB29F5347D00EFAA6B /* Sources */,
 				C5F649BC29F5347D00EFAA6B /* Frameworks */,
 				C5F649BD29F5347D00EFAA6B /* CopyFiles */,
@@ -115,12 +124,35 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C5F2DE692A038CE6006F5A60 /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C5F649BB29F5347D00EFAA6B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5F649C329F5347D00EFAA6B /* main.swift in Sources */,
+				C5F649C329F5347D00EFAA6B /* Grades+GradeLetter.swift in Sources */,
+				C5F2DE6829FA6A95006F5A60 /* main.swift in Sources */,
+				C5F2DE6C2A039D1F006F5A60 /* GuideString.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
