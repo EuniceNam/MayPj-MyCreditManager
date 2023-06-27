@@ -7,11 +7,9 @@
 
 import Foundation
 
-typealias StudentRecord = [String: Grades]
-
 // - MARK: main
 
-var students: StudentRecord = [:]
+var studentRecords: [String: Grades] = [:]
 let inputRegex = try Regex(#"[a-zA-Z0-9]+"#)
 
 menuLoop: while true {
@@ -46,10 +44,10 @@ func createStudent() throws {
     guard let input = readLine(), let info = InputInfoTrio(input: input, type: .student) else {
         throw CustomError.inputError
     }
-    guard students[info.name] == nil else {
+    guard studentRecords[info.name] == nil else {
         throw CustomError.studentExists(name: info.name)
     }
-    students[info.name] = Grades()
+    studentRecords[info.name] = Grades()
     print(GuideString.Student.addAccepted(name: info.name))
 }
 
@@ -58,10 +56,10 @@ func removeStudent() throws {
     guard let input = readLine(), let info = InputInfoTrio(input: input, type: .student) else {
         throw CustomError.inputError
     }
-    guard students[info.name] != nil else {
+    guard studentRecords[info.name] != nil else {
         throw CustomError.noStudent(name: info.name)
     }
-    students[info.name] = nil
+    studentRecords[info.name] = nil
     print(GuideString.Student.deleteAccepted(name: info.name))
 }
 
@@ -74,10 +72,11 @@ func addUpdateGrade() throws {
           let gradeLetter = GradeLetter[grade] else {
         throw CustomError.inputError
     }
-    guard let studentGrades = students[info.name] else {
+    guard let studentGrades = studentRecords[info.name] else {
         throw CustomError.noStudent(name: info.name)
     }
-    studentGrades.addUpdateGrade(subject: subject, grade: gradeLetter)
+//    studentGrades.addUpdateGrade(subject: subject, grade: gradeLetter)
+    studentGrades.grades[subject] = gradeLetter
     print(GuideString.Grade.addUpdateAccepted(name: info.name, subject: subject, grade: grade))
 }
 
@@ -88,7 +87,7 @@ func deleteGrade() throws {
           let subject = info.subject else {
         throw CustomError.inputError
     }
-    guard let studentGrades = students[info.name] else {
+    guard let studentGrades = studentRecords[info.name] else {
         throw CustomError.noStudent(name: info.name)
     }
     guard studentGrades.grades[subject] != nil else {
@@ -104,7 +103,7 @@ func printGPA() throws {
           let info = InputInfoTrio(input: input, type: .student) else {
         throw CustomError.inputError
     }
-    guard let studentGrades = students[info.name] else {
+    guard let studentGrades = studentRecords[info.name] else {
         throw CustomError.noStudent(name: info.name)
     }
     guard !studentGrades.grades.isEmpty else {
