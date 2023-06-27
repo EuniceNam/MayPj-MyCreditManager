@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C55F37C82A49830E00FA6FAD /* MyCreditManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55F37C72A49830E00FA6FAD /* MyCreditManagerTest.swift */; };
 		C55F37CD2A4ADED300FA6FAD /* InputInfoTrio.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55F37CC2A4ADED300FA6FAD /* InputInfoTrio.swift */; };
 		C55F37CF2A4AE16A00FA6FAD /* MenuSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55F37CE2A4AE16A00FA6FAD /* MenuSelection.swift */; };
 		C5F2DE6829FA6A95006F5A60 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F2DE6729FA6A95006F5A60 /* main.swift */; };
@@ -29,7 +28,6 @@
 
 /* Begin PBXFileReference section */
 		C55F37C52A49830E00FA6FAD /* MyCreditManagerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyCreditManagerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C55F37C72A49830E00FA6FAD /* MyCreditManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCreditManagerTest.swift; sourceTree = "<group>"; };
 		C55F37CC2A4ADED300FA6FAD /* InputInfoTrio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputInfoTrio.swift; sourceTree = "<group>"; };
 		C55F37CE2A4AE16A00FA6FAD /* MenuSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSelection.swift; sourceTree = "<group>"; };
 		C5F2DE6729FA6A95006F5A60 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -57,19 +55,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C55F37C62A49830E00FA6FAD /* MyCreditManagerTest */ = {
-			isa = PBXGroup;
-			children = (
-				C55F37C72A49830E00FA6FAD /* MyCreditManagerTest.swift */,
-			);
-			path = MyCreditManagerTest;
-			sourceTree = "<group>";
-		};
 		C5F649B629F5347D00EFAA6B = {
 			isa = PBXGroup;
 			children = (
 				C5F649C129F5347D00EFAA6B /* MyCreditManager */,
-				C55F37C62A49830E00FA6FAD /* MyCreditManagerTest */,
 				C5F649C029F5347D00EFAA6B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -207,7 +196,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C55F37C82A49830E00FA6FAD /* MyCreditManagerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

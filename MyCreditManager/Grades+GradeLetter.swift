@@ -9,9 +9,6 @@ import Foundation
 
 class Grades {
     var grades: [String: GradeLetter] = [:]
-    func addUpdateGrade(subject: String, grade: GradeLetter) {
-        grades[subject] = grade
-    }
     func calcGPA() -> Float {
         return grades.values.map {GradeLetter[$0]}.reduce(0.0, +) / Float(grades.count)
     }
