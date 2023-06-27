@@ -8,62 +8,112 @@
 import Foundation
 
 typealias StudentRecord = [String: Grades]
-typealias Grade = (subject: String, grade: GradeLetter)
 
 // - MARK: main
 
 var students: StudentRecord = [:]
+let inputRegex = try Regex(#"[a-zA-Z0-9]+"#)
 
 menuLoop: while true {
-    print("메뉴")
+    print(GuideString.MainMenu.menuGuide)
     if let menuInput = readLine() {
-        switch (MenuSelection[menuInput.trimmingCharacters(in: .whitespaces)]) {
+        let selectedMenu = MenuSelection[menuInput.trimmingCharacters(in: .whitespaces)]
+        switch selectedMenu {
         case .createStudent:
-            print("학생추가")
-            if let studentName = readLine() {
-                createStudent(studentName)
-            } else {
-                print("")
+            do { try createStudent() } catch {
+                print(error.localizedDescription)
             }
         case .removeStudent:
-            print("학생삭제")
-        case .updateGrade:
-            print("성적 추가/변경")
+            do { try removeStudent() } catch { print(error.localizedDescription) }
+        case .addUpdateGrade:
+            do { try addUpdateGrade() } catch { print(error.localizedDescription) }
         case .deleteGrade:
-            print("성적 삭제")
+            do { try deleteGrade() } catch { print(error.localizedDescription) }
         case .printGPA:
-            print("평균성적 출력")
-            print(String(format: "%.2f"), 123.342)
+            do { try printGPA() } catch { print(error.localizedDescription) }
         case .exit:
             break menuLoop
-        default:
-            print("입력오류")
-            
+        case .notInMenu:
+            print(GuideString.MainMenu.inputError)
         }
     }
 }
 
 // - MARK: functions
 
-func createStudent(_ name: String) {
-    
-}
-func removeStudent(_ name: String) {
-    
-}
-
-// - MARK: help enumerations
-
-enum MenuSelection: Int {
-    case createStudent = 1
-    case removeStudent
-    case updateGrade
-    case deleteGrade
-    case printGPA
-    case exit
-
-    static subscript(_ menuString: String) -> Self? {
-        guard let menuSelection = Int(menuString) else {return nil}
-        return Self(rawValue: menuSelection)
+func createStudent() throws {
+    print(GuideString.Student.addGuide)
+    guard let input = readLine(), let info = InputInfoTrio(input: input, type: .student) else {
+        throw CustomError.inputError
     }
+    guard students[info.name] == nil else {
+        throw CustomError.studentExists(name: info.name)
+    }
+    students[info.name] = Grades()
+    print(GuideString.Student.addAccepted(name: info.name))
+}
+
+func removeStudent() throws {
+    print(GuideString.Student.deleteGuide)
+    guard let input = readLine(), let info = InputInfoTrio(input: input, type: .student) else {
+        throw CustomError.inputError
+    }
+    guard students[info.name] != nil else {
+        throw CustomError.noStudent(name: info.name)
+    }
+    students[info.name] = nil
+    print(GuideString.Student.deleteAccepted(name: info.name))
+}
+
+func addUpdateGrade() throws {
+    print(GuideString.Grade.addUpdateGuide)
+    guard let input = readLine(),
+          let info = InputInfoTrio(input: input, type: .addUpdateGrade),
+          let subject = info.subject,
+          let grade = info.grade,
+          let gradeLetter = GradeLetter[grade] else {
+        throw CustomError.inputError
+    }
+    guard let studentGrades = students[info.name] else {
+        throw CustomError.noStudent(name: info.name)
+    }
+    studentGrades.addUpdateGrade(subject: subject, grade: gradeLetter)
+    print(GuideString.Grade.addUpdateAccepted(name: info.name, subject: subject, grade: grade))
+}
+
+func deleteGrade() throws {
+    print(GuideString.Grade.deleteGuide)
+    guard let input = readLine(),
+          let info = InputInfoTrio(input: input, type: .deleteGrade),
+          let subject = info.subject else {
+        throw CustomError.inputError
+    }
+    guard let studentGrades = students[info.name] else {
+        throw CustomError.noStudent(name: info.name)
+    }
+    guard studentGrades.grades[subject] != nil else {
+        throw CustomError.noSubject(name: info.name, subject: subject)
+    }
+    studentGrades.grades[subject] = nil
+    print(GuideString.Grade.deleteAccepted(name: info.name, subject: subject))
+}
+
+func printGPA() throws {
+    print(GuideString.Student.averageGradeGuide)
+    guard let input = readLine(),
+          let info = InputInfoTrio(input: input, type: .student) else {
+        throw CustomError.inputError
+    }
+    guard let studentGrades = students[info.name] else {
+        throw CustomError.noStudent(name: info.name)
+    }
+    guard !studentGrades.grades.isEmpty else {
+        throw CustomError.noGrade(name: info.name)
+    }
+
+    let sortedGrades = studentGrades.grades.sorted(by: {$0.0 < $1.0})
+    for grade in sortedGrades {
+        print("\(grade.key): \(grade.value.rawValue)")
+    }
+    print(String(format: "평점: %.2f", studentGrades.calcGPA()))
 }

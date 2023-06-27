@@ -7,10 +7,13 @@
 
 import Foundation
 
-struct Grades {
-    var grades: [Grade]
+class Grades {
+    var grades: [String: GradeLetter] = [:]
+    func addUpdateGrade(subject: String, grade: GradeLetter) {
+        grades[subject] = grade
+    }
     func calcGPA() -> Float {
-        return grades.map({GradeLetter[$0.grade]}).reduce(0.0, +) / Float(grades.count)
+        return grades.values.map {GradeLetter[$0]}.reduce(0.0, +) / Float(grades.count)
     }
 }
 
@@ -31,6 +34,7 @@ enum GradeLetter: String {
         return Self(rawValue: gradeString)
     }
 
+    // 평균평점 계산용
     static subscript(_ gradeLetter: Self) -> Float {
         switch gradeLetter {
         case .A_plus: return 4.5
