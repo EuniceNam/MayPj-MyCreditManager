@@ -18,9 +18,7 @@ menuLoop: while true {
         let selectedMenu = MenuSelection[menuInput.trimmingCharacters(in: .whitespaces)]
         switch selectedMenu {
         case .createStudent:
-            do { try createStudent() } catch {
-                print(error.localizedDescription)
-            }
+            do { try createStudent() } catch { print(error.localizedDescription) }
         case .removeStudent:
             do { try removeStudent() } catch { print(error.localizedDescription) }
         case .addUpdateGrade:
